@@ -27,8 +27,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<ul>
 					<li><a href="register.php">Register</a></li>
 					<li><a href="personlogin.php">Login</a></li>
-					<li><a href="#">Delivery</a></li>
-					<li><a href="#">Checkout</a></li>
+					<li><a href="logout.php">Logout</a></li>
+					<li><a href="showcart.php">Checkout</a></li>
 					<li><a href="#">My Account</a></li>
 				</ul>
 			</div>
@@ -36,48 +36,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 		<div class="header_top">
 			<div class="logo">
-				<a href="index.html"><img src="images/logoo.png" alt="" /></a>
+				<a href="index.php"><img src="images/logoo.png" alt="" /></a>
 			</div>
-			  <div class="cart">
-			  	   <p>Welcome to our Online Store! <span>Cart:</span><div id="dd" class="wrapper-dropdown-2"> 0 item(s) - $0.00
-			  	   	<ul class="dropdown">
-							<li>you have no items in your Shopping cart</li>
-					</ul></div></p>
-			  </div>
-			  <script type="text/javascript">
-			function DropDown(el) {
-				this.dd = el;
-				this.initEvents();
-			}
-			DropDown.prototype = {
-				initEvents : function() {
-					var obj = this;
-
-					obj.dd.on('click', function(event){
-						$(this).toggleClass('active');
-						event.stopPropagation();
-					});	
-				}
-			}
-
-			$(function() {
-
-				var dd = new DropDown( $('#dd') );
-
-				$(document).click(function() {
-					// all dropdowns
-					$('.wrapper-dropdown-2').removeClass('active');
-				});
-
-			});
-
-		</script>
 	 <div class="clear"></div>
   </div>
 	<div class="header_bottom">
 	     	<div class="menu">
 	     		<ul>
-			    	<li class="active"><a href="index.html">Home</a></li>
+			    	<li class="active"><a href="index.php">Home</a></li>
 			    	<li><a href="about.html">About</a></li>
 			    	<li><a href="delivery.html">Delivery</a></li>
 			    	<li><a href="news.html">News</a></li>
@@ -174,24 +140,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	  	     <?php
 	  	     	include('config.php');
 	  	     	$current_url = base64_encode($url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-	  	     	$data = "select * from table_name where ID = 100";
 
   				$query = "SELECT * FROM `kingston`.`laptop` ORDER BY laptopid ASC";
     			$results = mysqli_query($connection1, $query);
-        		//while ($row = mysqli_fetch_assoc($result)){
+
     			if ($results) { 
         			while ($obj = mysqli_fetch_assoc($results)) //fetch results set as object and output HTML
         			{
 						echo '<div class="grid_1_of_4 images_1_of_4">';
-						echo '<form method="post" action="cartupdate.php">';
-						echo '<a href="preview.html"><img src='.$obj['image'].' alt="" /></a>';
-						echo '<h2>'.$obj['brand'].' '.$obj['description'].'</h2>';
+						echo '<form method="post" action="checklogin.php">';
+						echo '<img src='.$obj['image'].' alt="" /></a>';
+						echo '<h2>'.$obj['brand'].' '.$obj['model'].'</h2>';
 						echo '<div class="price-details">';
 						echo '<div class="price-number">';
 						echo '<p><span class="rupees">$'.$obj['price'].'</span></p>';
 						echo '</div>';
 						echo '<div class="add-cart">';
-						echo '<h4><a href="checklogin.php">Add to Cart</a></h4>';
+						//echo '<h4><a href="checklogin.php">Add to Cart</a></h4>';
+						echo '<h4><button class="addcart" type="submit">Add To Cart</button></h4>';
 						echo '</div>';
 						echo '<div class="clear"></div>';
 						echo '<input type="hidden" name="laptop_code" value="'.$obj['laptopid'].'" />';
@@ -234,8 +200,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<h4>My account</h4>
 						<ul>
 							<li><a href="contact.html">Sign In</a></li>
-							<li><a href="index.html">View Cart</a></li>
-							<li><a href="#">My Wishlist</a></li>
+							<li><a href="logout.php">Logout</a></li>
+							<li><a href="showcart.php">View Cart</a></li>
 							<li><a href="#">Track My Order</a></li>
 							<li><a href="contact.html">Help</a></li>
 						</ul>
